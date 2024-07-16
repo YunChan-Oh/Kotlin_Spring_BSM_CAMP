@@ -54,11 +54,16 @@ class UrlService(
         return sb.reverse().toString().padStart(6, '0')
     }
 
-    fun findByTime(time: LocalDateTime?): List<UrlEntity>{
-        if (time==null){
-            val t = LocalDateTime.now().minusMinutes(10)
-            return urlRepository.findAllByCreatedAfter(t)
-        }
-        return urlRepository.findAllByCreatedAfter(time)
+//    fun findByTime(time: LocalDateTime?): List<UrlEntity>{
+//        if (time==null){
+//            val t = LocalDateTime.now().minusMinutes(10)
+//            return urlRepository.findAllByCreatedAfter(t)
+//        }
+//        return urlRepository.findAllByCreatedAfter(time)
+//    }
+    fun findByTime(time: LocalDateTime?): List<UrlEntity> {
+        return urlRepository.findAllByCreatedAfter(
+            time ?: LocalDateTime.now().minusMinutes(10)
+        )
     }
 }
