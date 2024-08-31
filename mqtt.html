@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form>
+    <label for="message">메세지</label>
+    <br>
+    <textarea id="message" name="message" rows="10" cols="50"></textarea>
+    <br>
+    <button type="submit">전송</button>
+</form>
+<script>
+    document.getElementById('textForm').addEventListener('submit',function (event) {
+        event.preventDefault();
+
+        const message = document.getElementById('message').value;
+        const payload = JSON.stringify({message: message});
+
+        fetch('http://localhost:8081/mqtt/publish',{
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: payload
+        })
+    })
+</script>
+</body>
+</html>
